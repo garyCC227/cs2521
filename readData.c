@@ -4,6 +4,8 @@
 #include "readData.h"
 #include <stdbool.h>
 
+#define strEQ(g,t) (strcmp((g),(t)) == 0)
+
 char **getUrlArray(int *numv){
     
     char ch;
@@ -45,41 +47,62 @@ char **getUrlArray(int *numv){
 Graph getGraph( char **urlArray, int numV){	
 	//new graph and pass number of vertexs argument
 	Graph g = newGraph(numV);	
-	int i,j;
+	int i,j,in_sec1;
 	FILE *fp;
 	char url[100];
 	char urlName[100];	
+
+	//add all url into graph vertex
+	for(i = 0;i<numV;i++) {
+		addVertex(urlArray[i],g->vertex,i);
+		g->nV++;
+		//printf("vertex is %s\n",g->vertex[i]);
+	}
 	//building graph
 	for(i = 0;i<numV;i++){
 		//copy path	
 		strcpy(url,urlArray[i]);
 		strcat(url,".txt");
-		printf("%s\n", url);
+		//printf("%s\n", url);
 		fp = fopen(url,"r");	
 		//in section 1
 		//scan into the file , get the outlinks url name
 		
 		//fscanf each words in "url.txt" into urlName array
+		//condintioner that whether fp in section-1 or not
+		in_sec1 = 0;
 		while((fscanf(fp, "%s", urlName)) == 1){
-		printf("%d\n", g->numV);
-			for(j = 0;j<numV;j++){
-				//get a url;
-				if(g->nV < numV && !inGraph(urlName,g->vertex)){
-					addEdge(g, urlName, urlArray[j]);
+			//printf("%s\n", urlName);
+			//starting to reading section-1 
+			if ( strEQ(urlName,"Section-1") && in_sec1 == 0){
+				in_sec1 =1;
+			}else if(strEQ(urlName,"Section-1") && in_sec1 == 1){
+			//end of section 1, break, get next url file
+				break;
+			}
+			if(in_sec1 == 1){
+			//printf("%s\n", urlName);
+				for(j = 0;j<numV;j++){
+					//if one url contain the outlink of another, build edge 
+					if(inGraph(urlName,g->vertex,g->nV)){
+						addEdge(g, urlArray[i], urlName);
+						
+					}
 				}
 			}
 			memset(urlName,0,sizeof(urlName));
 		}
-		numV 
+		
 	}
 	
 	return g;
 }
 
-bool inGraph(char *str, char **names){
+bool inGraph(char *str, char **names,int numV){
 	int i = 0;
-	while(names[i] != '\0'){
+	while(i < numV){
 		if(strcmp(str,names[i]) == 0) return 1;
+		
 		i++;
 	}
 	// if not in graph, return 0
@@ -92,3 +115,4 @@ bool inGraph(char *str, char **names){
 //level1:url11------->url22--------->url33
 //		  
 //level2:word1 word2 word3 word4 	word5 word6
+

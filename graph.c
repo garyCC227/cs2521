@@ -70,15 +70,13 @@ int addEdge(Graph g, char *src, char *dest)
 	assert(g != NULL);
 	int v = vertexID(src,g->vertex,g->nV);
 	if (v < 0) {
-		if (g->nV >= g->numV) return 0;
-		v = addVertex(src,g->vertex,g->nV);
-		g->nV++;
+		fprintf(stderr,"So such a url is not in graph %s\n",src);
+		return 0;
 	}
 	int w = vertexID(dest,g->vertex,g->nV);
 	if (w < 0) {
-		if (g->nV >= g->numV) return 0;
-		w = addVertex(dest,g->vertex,g->nV);
-		g->nV++;
+		fprintf(stderr,"So such a url is not in graph %s\n",dest);
+		return 0;
 	}
 	g->edges[v][w] = 1;
 	return 1;
@@ -155,3 +153,4 @@ int addVertex(char *str, char **names, int N)
 	names[N] = strdup(str);
 	return N;
 }
+

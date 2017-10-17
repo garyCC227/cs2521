@@ -9,4 +9,4 @@ char **getUrlArray();
 //get a graph for URL connection
 Graph getGraph( char **, int);
 //checking whether the url = str in the graph or not
-bool inGraph(char *, char **);
+bool inGraph(char *, char **,int);
