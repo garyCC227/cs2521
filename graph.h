@@ -14,12 +14,12 @@ typedef struct GraphRep {
 
 
 // Function signatures
-
+int isConnectedIn(Graph g, char *src, char *dest);
 Graph newGraph(int numV);
 void  disposeGraph(Graph);
 int   addEdge(Graph,char *,char *);
 int   nVertices(Graph);
-int   isConnected(Graph, char *, char *);
+int   isConnectedOut(Graph, char *, char *);
 void  showGraph(Graph,int);
 int addVertex(char *str, char **names, int N);
 

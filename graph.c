@@ -16,8 +16,9 @@ Graph newGraph();
 void  disposeGraph(Graph);
 int   addEdge(Graph,char *,char *);
 int   nVertices(Graph);
-int   isConnected(Graph, char *, char *);
+int   isConnectedOut(Graph, char *, char *);
 void  showGraph(Graph,int);
+int isConnectedIn(Graph g, char *src, char *dest);
 
 static int vertexID(char *, char **, int);
 int addVertex(char *, char **, int);
@@ -82,9 +83,9 @@ int addEdge(Graph g, char *src, char *dest)
 	return 1;
 }
 
-// isConnected(Graph,Src,Dest)
-// - check whether there is an edge from Src->Dest
-int isConnected(Graph g, char *src, char *dest)
+// isConnectedout(Graph,Src,Dest)
+// - check whether there is an edge from Src->Dest for outlink
+int isConnectedOut(Graph g, char *src, char *dest)
 {
 	assert(g != NULL);
 	int v = vertexID(src,g->vertex,g->nV);
@@ -94,7 +95,18 @@ int isConnected(Graph g, char *src, char *dest)
 	else
 		return g->edges[v][w];
 }
-
+// isConnectedint(Graph,Src,Dest)
+// - check whether there is an edge from Src->Dest for inlink
+int isConnectedIn(Graph g, char *src, char *dest)
+{
+	assert(g != NULL);
+	int v = vertexID(src,g->vertex,g->nV);
+	int w = vertexID(dest,g->vertex,g->nV);
+	if (v < 0 || w < 0)
+		return 0;
+	else
+		return g->edges[v][w];
+}
 // nVertices(Graph)
 // - return # vertices currently in Graph
 int nVertices(Graph g)
