@@ -1,10 +1,8 @@
 // graph.h ... Interface to Graph of strings
 // Written by John Shepherd, September 2015
 
-#ifndef GRAPH_H
-#define GRAPH_H
 
-typedef struct GraphRep *Graph;
+
 //typedef unsigned char Num;
 
 typedef struct GraphRep {
@@ -14,7 +12,7 @@ typedef struct GraphRep {
 	
 } GraphRep;
 
-
+typedef struct GraphRep *Graph;
 // Function signatures
 
 Graph newGraph(int numV);
@@ -25,4 +23,3 @@ int   isConnected(Graph, char *, char *);
 void  showGraph(Graph,int);
 int addVertex(char *str, char **names, int N);
 
-#endif
