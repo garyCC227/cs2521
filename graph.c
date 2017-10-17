@@ -30,6 +30,7 @@ Graph newGraph(int numV)
 	assert(new != NULL);
 	int i, j;
 	new->nV = 0;
+	new->numV = numV;
 	new->vertex = malloc(numV*sizeof(char *));
 	assert(new->vertex != NULL);
 	new->edges = malloc(numV*sizeof(int *));
@@ -53,7 +54,7 @@ void disposeGraph(Graph g)
 	for (i = 0; i < g->nV; i++) {
 		free(g->vertex[i]);
 	}
-	for (i = 0; i < g->maxV; i++) {
+	for (i = 0; i < g->numV; i++) {
 		free(g->edges[i]);
 	}
 	free(g->edges);
@@ -69,13 +70,13 @@ int addEdge(Graph g, char *src, char *dest)
 	assert(g != NULL);
 	int v = vertexID(src,g->vertex,g->nV);
 	if (v < 0) {
-		if (g->nV >= g->maxV) return 0;
+		if (g->nV >= g->numV) return 0;
 		v = addVertex(src,g->vertex,g->nV);
 		g->nV++;
 	}
 	int w = vertexID(dest,g->vertex,g->nV);
 	if (w < 0) {
-		if (g->nV >= g->maxV) return 0;
+		if (g->nV >= g->numV) return 0;
 		w = addVertex(dest,g->vertex,g->nV);
 		g->nV++;
 	}

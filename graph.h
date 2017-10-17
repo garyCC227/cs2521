@@ -2,17 +2,17 @@
 // Written by John Shepherd, September 2015
 
 
-
-//typedef unsigned char Num;
+typedef struct GraphRep *Graph;
 
 typedef struct GraphRep {
 	int   nV;
+	int   numV;
 	char  **vertex;// array to store the name of url
 	int   **edges; // matrix of boolean
 	
 } GraphRep;
 
-typedef struct GraphRep *Graph;
+
 // Function signatures
 
 Graph newGraph(int numV);

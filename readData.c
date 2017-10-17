@@ -2,11 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "readData.h"
-#include "graph.h"
-#include <bsd/string.h>
 #include <stdbool.h>
 
-char **getUrlArray(){
+char **getUrlArray(int *numv){
     
     char ch;
     int i, size = 0, in_word = 0;
@@ -20,7 +18,8 @@ char **getUrlArray(){
             in_word = 1; //checks word amount
         }
     }
-    printf("%d\n", size);
+    //printf("%d\n", size);
+    *numv = size;
     rewind(fp); //go back to start of file
     char **urlArray;
     urlArray = malloc(size * sizeof(char *));
@@ -35,48 +34,43 @@ char **getUrlArray(){
     for (i = 0; i < size; i++){
         fscanf(fp, "%s", urlArray[i]);
     }
-    for (i = 0; i < size; i++){
-        printf("%s\n", urlArray[i]);
-    }    
+    //for (i = 0; i < size; i++){
+    //    printf("%s\n", urlArray[i]);
+    //}    
     fclose(fp);
     
     return urlArray;
 }
 
-int get_size_of_array(char **urlArray){
-	
-	int i =0;
-	while(urlArray[i]!='\0') i++;
-	fprintf(stderr,"how many URLs: %d\n", i);
-	return i;
-}
-
 Graph getGraph( char **urlArray, int numV){	
 	//new graph and pass number of vertexs argument
 	Graph g = newGraph(numV);	
-	int i;
+	int i,j;
 	FILE *fp;
 	char url[100];
 	char urlName[100];	
 	//building graph
 	for(i = 0;i<numV;i++){
 		//copy path	
-		strlcpy(url,urlArray[i],sizeof(urlArray[i]));
-		strlcat(url,".txt",10*sizeof(char));
+		strcpy(url,urlArray[i]);
+		strcat(url,".txt");
+		printf("%s\n", url);
 		fp = fopen(url,"r");	
 		//in section 1
 		//scan into the file , get the outlinks url name
 		
 		//fscanf each words in "url.txt" into urlName array
-		while(!fscanf(fp, "%s", urlName)){
-			for(int j = 0;j<numV;j++){
+		while((fscanf(fp, "%s", urlName)) == 1){
+		printf("%d\n", g->numV);
+			for(j = 0;j<numV;j++){
 				//get a url;
-				if(g->nV < numV && inGraph(urlName,g->vertex)){
+				if(g->nV < numV && !inGraph(urlName,g->vertex)){
 					addEdge(g, urlName, urlArray[j]);
 				}
 			}
 			memset(urlName,0,sizeof(urlName));
 		}
+		numV 
 	}
 	
 	return g;

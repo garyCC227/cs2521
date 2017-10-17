@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <bsd/string.h>
 #include "readData.h"
-#include "graph.h"
 #include <stdbool.h>
 
 int main(int argc, char *argv[]){
@@ -11,13 +10,13 @@ int main(int argc, char *argv[]){
 		//fprintf(stderr, "Usage: %s <filename> #num #num\n", argv[0]);
 	
 	// ptr pointer to the array store all the vertexs
-	char **urlArray = (getUrlArray());
+	int numV = 0;
+	char **urlArray = getUrlArray(&numV);
 	// get the amount of vettexs
-	int numV = get_size_of_array(urlArray);
-	//printf("%d\n", numV);
+	printf("%d\n", numV);
 	// get a graph
-	graph g = getGraph(urlArray,numV);
-	
+	Graph g = getGraph(urlArray,numV);
+	showGraph(g,1);
 	//pageRank
 	
 	return 0;	
