@@ -1,0 +1,2 @@
+printf("%s\n", urlName);
+for(i = 0;i<numW;i++) printf("%s\n",words[i]);

@@ -92,7 +92,7 @@ Graph getGraph( char **urlArray, int numV){
 			}
 			memset(urlName,0,sizeof(urlName));
 		}
-		
+		fclose(fp);
 	}
 	
 	return g;

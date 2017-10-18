@@ -1,0 +1,8 @@
+
+
+
+void invetedIndex(char **urlArray,){
+
+
+
+}

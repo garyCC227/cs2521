@@ -18,6 +18,8 @@ int main(int argc, char *argv[]){
 	showGraph(g,1);
 	//pageRank
 	in_out_degree(g);
+	
+	
 	return 0;	
 }
 
