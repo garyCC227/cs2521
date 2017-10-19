@@ -2,6 +2,7 @@
 
 // Queue items are positive integers
 typedef char *Item;
+typedef struct QueueNode *Link;
 // Queues has a hidden representation
 typedef struct QueueRep *Queue; 
 
@@ -22,4 +23,7 @@ int  queueLength(Queue);
 
 // display Queue as list of 2-digit numbers
 void showQueue(Queue);
-
+// 
+int isSeen(Queue q, Item it);
+// get id to find the url in queue
+Item getURL(Queue q,int id);

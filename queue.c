@@ -2,8 +2,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
-#include "Queue.h"
+#include "queue.h"
+
+#define strEQ(g,t) (strcmp((g),(t)) == 0)
 
 typedef struct QueueNode *Link;
 
@@ -23,6 +26,7 @@ static Link createNode(Item item)
 { 
    Link n = malloc(sizeof(struct QueueNode));
    assert(n != NULL);
+   n->item = malloc(sizeof(char*));
    n->item = item; 
    n->next = NULL;    
    return n;                   
@@ -61,6 +65,8 @@ void enterQueue (Queue q, Item it)
    Link n = createNode(it);
    if (q->head == NULL) {
       q->head = n; 
+   }else{
+	q->tail->next = n;
    }
    q->tail = n;
    q->size++;
@@ -88,13 +94,47 @@ int queueLength(Queue q)
 // display Queue as list of 2-digit numbers
 void showQueue(Queue q)
 {
-   printf("H");
    Link curr;
    curr = q->head;
    while (curr != NULL) {
-      printf(" %02d", curr->item);
-      curr =curr->next
-   	
+      printf(" %s\n", curr->item);
+      curr =curr->next;
    }
-   printf(" T\n");
 }
+//check duplicate item in this queue,
+//return -1, not seen
+//return other positive integer for id(position in queue)
+int isSeen(Queue q, Item it){
+	if(q == NULL){
+		return -1;
+	}
+	
+	Link curr;
+	int i = 0;
+	curr = q->head;
+	while (curr != NULL) {
+		if(strEQ(curr->item,it)){
+			// id
+			return i;
+		}
+		curr =curr->next;
+		i++;
+	}
+	return -1;
+}
+// get id to find the url in queue
+Item getURL(Queue q,int id){
+	Link curr;
+	int i = 0;
+	curr = q->head;
+	while (curr != NULL) {
+		if( i == id){
+			// id
+			return curr->item;
+		}
+		curr =curr->next;
+		i++;
+	}
+	return NULL;
+}
+
