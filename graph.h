@@ -1,7 +1,8 @@
 // graph.h ... Interface to Graph of strings
-// Written by John Shepherd, September 2015
+// Written by linchen chen, 19/10/2017
 
-
+#ifndef GRAPH_H
+#define GRAPH_H
 typedef struct GraphRep *Graph;
 
 typedef struct GraphRep {
@@ -22,4 +23,7 @@ int   nVertices(Graph);
 int   isConnectedOut(Graph, char *, char *);
 void  showGraph(Graph,int);
 int addVertex(char *str, char **names, int N);
+int vertexID(char *, char **, int);
+int isConnectedByID(Graph g, int v, int w);
+#endif
 

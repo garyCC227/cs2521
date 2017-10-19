@@ -1,5 +1,5 @@
 // graph.c ... Graph of strings (adjacency matrix)
-// Written by John Shepherd, September 2015
+// Written by linchen chen, 19/10/2017
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -19,8 +19,9 @@ int   nVertices(Graph);
 int   isConnectedOut(Graph, char *, char *);
 void  showGraph(Graph,int);
 int isConnectedIn(Graph g, char *src, char *dest);
+int isConnectedByID(Graph g, int v, int w);
 
-static int vertexID(char *, char **, int);
+int vertexID(char *, char **, int);
 int addVertex(char *, char **, int);
 
 // newGraph()
@@ -95,6 +96,13 @@ int isConnectedOut(Graph g, char *src, char *dest)
 	else
 		return g->edges[v][w];
 }
+//check if v vertex link to u vertex by input id
+int isConnectedByID(Graph g, int v, int w)
+{
+	assert(g != NULL);
+	return g->edges[v][w];
+}
+
 // isConnectedint(Graph,Src,Dest)
 // - check whether there is an edge from Src->Dest for inlink
 int isConnectedIn(Graph g, char *src, char *dest)
@@ -150,7 +158,7 @@ void showGraph(Graph g, int mode)
 // vertexID(Str,Names,N)
 // - searches for Str in array of Names[N]
 // - returns index of Str if found, -1 if not
-static int vertexID(char *str, char **names, int N)
+int vertexID(char *str, char **names, int N)
 {
 	int i;
 	for (i = 0; i < N; i++)

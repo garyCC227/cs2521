@@ -1,8 +1,6 @@
+#include "readData.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "readData.h"
-#include <stdbool.h>
 
 #define strEQ(g,t) (strcmp((g),(t)) == 0)
 
@@ -109,10 +107,14 @@ bool inGraph(char *str, char **names,int numV){
 	return 0;
 }
 
+//free memoery
+void freeMemory(char **ptr, int length){
+    int i; 
 
-//invertedList(BST tree);
-//e.g
-//level1:url11------->url22--------->url33
-//		  
-//level2:word1 word2 word3 word4 	word5 word6
+    for(i=0; i<length; i++){
+        free(ptr[i]);
+    }
+
+    free(ptr);
+}
 

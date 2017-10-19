@@ -1,4 +1,13 @@
-#include "invertedIndex.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <bsd/string.h>
+#include "readData.h"
+#include <stdbool.h>
+
+#define MAX_L 50
+#define strEQ(g,t) (strcmp((g),(t)) == 0)
 
 int main(int argc, char *argv[]){
 	
@@ -76,8 +85,8 @@ int main(int argc, char *argv[]){
 	writeToFile(numW,numUrl,urlArray,words);
 	
 	//free memory 
-	//freeMemory(urlArray, numURLs);
-	//freeMemory(wordArray, nWords);
+	freeMemory(urlArray, numUrl);
+	freeMemory(words, numW);
 	
 	return 0;
 }
@@ -100,8 +109,6 @@ void normalise(char *ch){
         }
     }
     *next = '\0'; 
-
-
 }
 
 // sorting the array in alph order by bubble sort
@@ -113,7 +120,7 @@ void sort(char **array, int maxA){
 		for(j = 1;j < maxA;j++){
 			if(strcmp(array[j-1],array[j])>0){
 				temp = array[j - 1];
-           		array[j - 1] = array[j];
+		 		array[j - 1] = array[j];
             	array[j] = temp;
 			}
 			
@@ -192,6 +199,16 @@ void writeToFile(int numW, int numUrl, char ** urlArray, char **words){
 		}
 	}
 	
-
-
 }
+
+//free memoery
+void freeMemory(char **ptr, int length){
+    int i; 
+
+    for(i=0; i<length; i++){
+        free(ptr[i]);
+    }
+
+    free(ptr);
+}
+

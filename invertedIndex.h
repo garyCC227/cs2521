@@ -1,15 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <bsd/string.h>
-#include "readData.h"
-#include <stdbool.h>
-#define MAX_L 50
+// Written by linchen chen, 19/10/2017
 
-#define strEQ(g,t) (strcmp((g),(t)) == 0)
+#ifndef INVERTEDINDX_H
+#define INVERTEDINDX_H
 //function signature
 void sort(char **array, int maxA);
 void normalise(char *ch);
 int NoduplicateWord(char *word, char **storage,int numW);
 void writeToFile(int numW, int numUrl, char ** urlArray, char **words);
+void freeMemory(char **ptr, int length);
+
+
+
+#endif
