@@ -1,3 +1,9 @@
+
+
+
+
+#ifndef QUEUE_H
+#define QUEUE_H
 // Queue.h ... Queue ADT
 
 // Queue items are positive integers
@@ -27,3 +33,9 @@ void showQueue(Queue);
 int isSeen(Queue q, Item it);
 // get id to find the url in queue
 Item getURL(Queue q,int id);
+
+char **findURLs(Queue searchWords,char **URLs,int numUrl,int N,int *);
+int *findFrequency(Queue searchWord, char **URLs, int numURL);
+void normalise(char *ch);
+
+#endif

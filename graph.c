@@ -5,24 +5,11 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
-#include "graph.h"
+#include "readData.h"
 
 #define strEQ(g,t) (strcmp((g),(t)) == 0)
 
 
-// Function signatures
-
-Graph newGraph();
-void  disposeGraph(Graph);
-int   addEdge(Graph,char *,char *);
-int   nVertices(Graph);
-int   isConnectedOut(Graph, char *, char *);
-void  showGraph(Graph,int);
-int isConnectedIn(Graph g, char *src, char *dest);
-int isConnectedByID(Graph g, int v, int w);
-
-int vertexID(char *, char **, int);
-int addVertex(char *, char **, int);
 
 // newGraph()
 // - create an initially empty Graph
@@ -170,7 +157,7 @@ int vertexID(char *str, char **names, int N)
 // - add Str at end of Names
 int addVertex(char *str, char **names, int N)
 {
-	names[N] = strdup(str);
+	strcpy(names[N], str);
 	return N;
 }
 

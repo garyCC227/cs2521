@@ -3,7 +3,6 @@
 #ifndef READDATA_H
 #define READDATA_H
 
-#include "graph.h"
 #include <stdbool.h>
 #include <bsd/string.h>
 

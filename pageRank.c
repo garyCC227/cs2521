@@ -6,18 +6,8 @@
 #include <math.h>
 
 
-#define MAX 3 // for array(collect in/out degree) max to 3;
 
-//function signature 
-double *pageRank(Graph g, double d, double diffPR,int maxT);
-int  *outDegree(Graph g);
-int  *inDegree(Graph g);
-double WeightedInPR(Graph g,int *inDegree, int IDv, int IDu);
-double WeightedOutPR(Graph g,int *outDegree, int IDv, int IDu);
-double sumInDegree(Graph g,int id,int *InDegree);
-double sumOutDegree(Graph g,int id,int *outDegree);
-void sortPageRank(double *pageRank, char **urlArray, int *outDeg, int numUrl);
-void writePR(double *pageR, char **urlArray, int *outD, int numV);
+#define MAX 3 // for array(collect in/out degree) max to 3;
 
 int main(int argc, char *argv[]){
 	
@@ -47,8 +37,17 @@ int main(int argc, char *argv[]){
 	//sorting page rank,urlArray and outdegree in a descending order
 	sortPageRank(pageR, urlArray, outD, g->nV);
 
-	//write to .txt file
+	//write pagerank to .txt file
 	writePR(pageR,urlArray,outD,g->nV);
+
+
+
+
+	//write invertedIndex.txt
+	invertedIndex();
+
+
+
 
 	//free memory
 	free(urlArray);

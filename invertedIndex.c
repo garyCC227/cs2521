@@ -3,13 +3,13 @@
 #include <string.h>
 #include <ctype.h>
 #include <bsd/string.h>
-#include "readData.h"
+#include "invertedIndex.h"
 #include <stdbool.h>
 
 #define MAX_L 50
 #define strEQ(g,t) (strcmp((g),(t)) == 0)
 
-int main(int argc, char *argv[]){
+void invertedIndex(){
 	
 	int i;
 	FILE *fp;
@@ -24,8 +24,8 @@ int main(int argc, char *argv[]){
         urlArray[numUrl] = malloc(strlen(url)+1);
 		strcpy(urlArray[numUrl++], url);
 	}
-	// sort urlArray in alph order
-	sort(urlArray, numUrl);
+	// sortArray urlArray in alph order
+	sortArray(urlArray, numUrl);
 	// normalise urlArray
 	for(i=0;i<numUrl;i++) {
 		normalise(urlArray[i]);	
@@ -78,8 +78,8 @@ int main(int argc, char *argv[]){
 		fclose(fp);
 	}
 	
-	// sort all the words in alph order
-	sort(words, numW);
+	// sortArray all the words in alph order
+	sortArray(words, numW);
 	//for(i = 0;i<numW;i++) printf("%s\n",words[i]);
 	//write to invetedInde.txt file
 	writeToFile(numW,numUrl,urlArray,words);
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
 	freeMemory(urlArray, numUrl);
 	freeMemory(words, numW);
 	
-	return 0;
+
 }
 //lowcase the array characters
 void normalise(char *ch){
@@ -111,8 +111,8 @@ void normalise(char *ch){
     *next = '\0'; 
 }
 
-// sorting the array in alph order by bubble sort
-void sort(char **array, int maxA){
+// sortArraying the array in alph order by bubble sortArray
+void sortArray(char **array, int maxA){
 
 	int i,j;
 	char *temp;

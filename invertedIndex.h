@@ -3,7 +3,9 @@
 #ifndef INVERTEDINDX_H
 #define INVERTEDINDX_H
 //function signature
-void sort(char **array, int maxA);
+
+void invertedIndex();
+void sortArray(char **array, int maxA);
 void normalise(char *ch);
 int NoduplicateWord(char *word, char **storage,int numW);
 void writeToFile(int numW, int numUrl, char ** urlArray, char **words);

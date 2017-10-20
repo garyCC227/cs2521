@@ -5,6 +5,8 @@
 #define GRAPH_H
 typedef struct GraphRep *Graph;
 
+
+
 typedef struct GraphRep {
 	int   nV;
 	int   numV;

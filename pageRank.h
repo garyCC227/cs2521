@@ -5,6 +5,7 @@
 #define PAGERANK_H
 
 #include "readData.h"
+#include "invertedIndex.h"
 
 double *pageRank(Graph g, double d, double diffPR,int maxT);
 int  *outDegree(Graph g);
